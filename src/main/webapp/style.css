@@ -1,0 +1,11 @@
+.gradient-bg {
+    background-image: linear-gradient(340deg, #f3dce2, #dacff9);
+}
+
+.form-bg{
+    background-image: linear-gradient(340deg, #f3dce2, #dacff9);
+}
+.form-sign-in {
+    max-width: 500px;
+    padding: 1rem;
+}

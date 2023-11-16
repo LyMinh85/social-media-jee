@@ -1,53 +1,37 @@
-package com.example.socialmedia.entity;
+package com.example.socialmedia.DTO;
 
+import com.example.socialmedia.entity.AvatarImage;
+import com.example.socialmedia.entity.Friendship;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Table(name = "user")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+public class UserDTO {
     private Long id;
 
-    @Column(name = "username", nullable = false, length = 100)
+    @NotEmpty(message = "Tên hiển thị không được để trống")
     private String username;
 
-    @Column(name = "email", nullable = false, length = 100)
+    @NotEmpty(message = "Email không được để trống")
+    @Email(message = "Không đúng định dạng email")
     private String email;
 
-    @Column(name = "password", nullable = false, length = 300)
+    @NotEmpty(message = "Password không được để trống")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$", message = "Tối thiểu 8 ký tự, bao gồm số, chữ thường và chữ in hoa")
     private String password;
 
-    @Column(name = "bio", length = 200)
     private String bio;
 
-    @Column(name = "gender", nullable = false, length = 20)
+    @NotEmpty(message = "Hãy chọn giới tính")
     private String gender;
 
-    @Column(name = "create_at", nullable = false)
     private Date createAt;
 
-    @OneToMany(mappedBy = "user1")
-    private List<Friendship> friendships1;
-
-    @OneToMany(mappedBy = "user2")
-    private List<Friendship> friendships2;
-
-    @OneToOne
-    @JoinColumn(name = "avatar_image_id")
-    private AvatarImage avatarImage;
-
-    @PrePersist
-    protected void onCreate() {
-        createAt = new Date();
-    }
-
-    public User() {
+    public UserDTO() {
     }
 
     public Long getId() {

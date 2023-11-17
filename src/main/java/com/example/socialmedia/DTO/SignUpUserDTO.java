@@ -1,16 +1,12 @@
 package com.example.socialmedia.DTO;
 
-import com.example.socialmedia.entity.AvatarImage;
-import com.example.socialmedia.entity.Friendship;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 
 import java.util.Date;
-import java.util.List;
 
-public class UserDTO {
+public class SignUpUserDTO {
     private Long id;
 
     @NotEmpty(message = "Tên hiển thị không được để trống")
@@ -24,14 +20,10 @@ public class UserDTO {
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$", message = "Tối thiểu 8 ký tự, bao gồm số, chữ thường và chữ in hoa")
     private String password;
 
-    private String bio;
-
     @NotEmpty(message = "Hãy chọn giới tính")
     private String gender;
 
-    private Date createAt;
-
-    public UserDTO() {
+    public SignUpUserDTO() {
     }
 
     public Long getId() {
@@ -66,28 +58,12 @@ public class UserDTO {
         this.password = password;
     }
 
-    public String getBio() {
-        return bio;
-    }
-
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
-
     public String getGender() {
         return gender;
     }
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public Date getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
     }
 
     @Override
@@ -97,9 +73,7 @@ public class UserDTO {
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", bio='" + bio + '\'' +
                 ", gender='" + gender + '\'' +
-                ", createAt=" + createAt +
                 '}';
     }
 }

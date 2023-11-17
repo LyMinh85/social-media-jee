@@ -2,7 +2,7 @@ package com.example.socialmedia.routes.auth;
 
 import com.example.socialmedia.BeanValidator;
 import com.example.socialmedia.DAO.UserDAO;
-import com.example.socialmedia.DTO.UserDTO;
+import com.example.socialmedia.DTO.SignUpUserDTO;
 import com.example.socialmedia.entity.User;
 import com.google.common.hash.Hashing;
 import jakarta.servlet.ServletException;
@@ -11,17 +11,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
 import org.apache.commons.beanutils.BeanUtils;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 @WebServlet("/auth/sign-up")
@@ -37,12 +30,12 @@ public class SignUpServlet extends HttpServlet {
         try {
             boolean error = false;
             // Đổ dữ liệu input vào DTO
-            UserDTO userDTO = new UserDTO();
+            SignUpUserDTO userDTO = new SignUpUserDTO();
             BeanUtils.populate(userDTO, req.getParameterMap());
 
             // Kiểm tra các thuộc tính email, username, password, gender có
             // hợp lệ hay không
-            Set<ConstraintViolation<UserDTO>> violations = BeanValidator.getValidator().validate(userDTO);
+            Set<ConstraintViolation<SignUpUserDTO>> violations = BeanValidator.getValidator().validate(userDTO);
             // Nếu tồn tại ít nhất 1 dữ liệu ko hợp lệ
             if (!violations.isEmpty()) {
                 error = true;

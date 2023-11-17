@@ -33,9 +33,8 @@ public class SignInServlet extends HttpServlet {
         // Nếu tìm thấy
         //  Hash password người dùng nhập vào
         //  So sánh với User.password
-        //  Nếu 2 cái pass khác nhau
-        //      Nếu sai => Hiển thị thông báo email hoặc mật khẩu không đúng
-        //      Nếu đúng => Lưu User vào session => Chuyển sang trang hom
+        //      Nếu khác => Hiển thị thông báo email hoặc mật khẩu không đúng
+        //      Nếu giống => Lưu User vào session => Chuyển sang trang hom
         // <...your code...>
 
         req.getRequestDispatcher("/auth/sign-in.jsp").forward(req, resp);

@@ -21,12 +21,12 @@ public class UsersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserDAO userDAO = new UserDAO();
         String name = req.getParameter("q");
-        List<UserDTO> users = userDAO.filterByName(name);
-        String usersJsonString = new Gson().toJson(users);
-        PrintWriter out = resp.getWriter();
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-        out.print(usersJsonString);
-        out.flush();
+//        List<UserDTO> users = userDAO.filterByName(name);
+//        String usersJsonString = new Gson().toJson(users);
+//        PrintWriter out = resp.getWriter();
+//        resp.setContentType("application/json");
+//        resp.setCharacterEncoding("UTF-8");
+//        out.print(usersJsonString);
+//        out.flush();
     }
 }

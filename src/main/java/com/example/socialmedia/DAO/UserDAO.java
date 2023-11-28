@@ -1,9 +1,13 @@
 package com.example.socialmedia.DAO;
 
+import com.example.socialmedia.DTO.UserDTO;
 import com.example.socialmedia.entity.JpaManager;
 import com.example.socialmedia.entity.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO {
     public boolean createOne(User user) throws Exception {
@@ -30,7 +34,7 @@ public class UserDAO {
         return false;
     }
 
-    public User findOne(int id) {
+    public User findOne(Long id) {
         EntityManager em = JpaManager.getEntityManager();
 
         User user = null;
@@ -66,5 +70,24 @@ public class UserDAO {
             JpaManager.closeEntityManager(em);
         }
         return user;
+    }
+
+    public List<UserDTO> filterByName(String name) {
+        EntityManager em = JpaManager.getEntityManager();
+        List<UserDTO> users = new ArrayList<>();
+        try {
+            JpaManager.beginTransaction(em);
+            String queryString = "SELECT NEW com.example.socialmedia.DTO.UserDTO(u.id, u.username) from User u where username like :username";
+            TypedQuery<UserDTO> query = em.createQuery(queryString, UserDTO.class);
+            query.setParameter("username", "%" + name + "%");
+            users = query.getResultList();
+            JpaManager.commitTransaction(em);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JpaManager.rollbackTransaction(em);
+        } finally {
+            JpaManager.closeEntityManager(em);
+        }
+        return users;
     }
 }

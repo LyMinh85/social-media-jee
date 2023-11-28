@@ -4,6 +4,8 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/auth" value="file://$PROJECT_DIR$/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/home.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/particle/navbar.jsp" value="file://$PROJECT_DIR$/src/main/webapp/particle" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/raw-html/home.html" value="file://$PROJECT_DIR$/src/main/webapp/raw-html" />
       </map>
     </option>

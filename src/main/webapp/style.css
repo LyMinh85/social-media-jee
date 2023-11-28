@@ -9,3 +9,26 @@
     max-width: 500px;
     padding: 1rem;
 }
+
+.btn-light {
+    background-color: #fcfcfc !important;
+    border: none;
+}
+
+.btn-light:hover {
+    background-color: #f2f2f2!important;
+}
+
+.bg-body-tertiary {
+    background-color: #f7f6f6 !important;
+}
+
+textarea {
+    resize: none;
+}
+
+@media (min-width: 768px) {
+    .position-md-absolute {
+       position: absolute;
+    }
+}

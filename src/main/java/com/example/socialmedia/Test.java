@@ -1,5 +1,7 @@
 package com.example.socialmedia;
 
+import com.example.socialmedia.DAO.FriendshipDAO;
+import com.example.socialmedia.DTO.UserDTO;
 import com.example.socialmedia.entity.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
@@ -82,7 +84,7 @@ public class Test {
             friendship.setId(friendshipKey);
             friendship.setUser1(user1);
             friendship.setUser2(user2);
-            friendship.setStatus("Accepted");
+            friendship.setStatus(FriendshipStatus.PENDING);
             em.persist(friendship);
             JpaManager.commitTransaction(em);
         } catch (Exception e) {
@@ -125,6 +127,6 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        likePost(1, 2);
+
     }
 }

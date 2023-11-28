@@ -13,15 +13,16 @@ public class Friendship {
     @ManyToOne(cascade = CascadeType.MERGE)
     @MapsId("user1Id")
     @JoinColumn(name = "user1_id")
-    User user1;
+    User user1; // Người gửi yêu cầu
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @MapsId("user2Id")
     @JoinColumn(name = "user2_id")
-    User user2;
+    User user2; // Người nhận yêu cầu
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    String status;
+    FriendshipStatus status;
 
     @Column(name = "create_at", nullable = false)
     Date createAt;
@@ -55,11 +56,11 @@ public class Friendship {
         this.user2 = user2;
     }
 
-    public String getStatus() {
+    public FriendshipStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(FriendshipStatus status) {
         this.status = status;
     }
 

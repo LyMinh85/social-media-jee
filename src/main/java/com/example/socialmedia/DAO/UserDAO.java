@@ -20,7 +20,7 @@ public class UserDAO {
         try {
             JpaManager.beginTransaction(em);
             // Tạo Entity
-            user = user;
+
             // Insert vào CSDL
             em.persist(user);
             JpaManager.commitTransaction(em);

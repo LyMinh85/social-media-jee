@@ -11,7 +11,7 @@
 <body class="h-100">
 <div class="form-bg d-flex align-items-center py-4 bg-body-tertiary vh-100">
     <main class="form-sign-in w-100 m-auto bg-white shadow">
-        <form id="form-sign-up" class="mx-4 mt-1" action="<c:url value="/auth/sign-up"/>" method="post">
+        <form id="form-sign-up" class="mx-4 mt-1" action="<c:url value="/auth/sign-in"/>" method="post">
             <h1 class="h3 mb-3 fw-normal text-center fw-bold">Đăng ký</h1>
 
             <div class="input-group my-3">
@@ -22,7 +22,7 @@
                     >
                     <label for="floatingEmail">Địa chỉ email</label>
                 </div>
-                <custom:validationErrors field="email" violations="${violations}"/>
+                <custom:validationErrors field="email" violations="${}"/>
             </div>
 
             <div class="input-group my-3">

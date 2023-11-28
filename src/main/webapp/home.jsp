@@ -31,11 +31,12 @@
                         <div class="form-outline w-100">
 
                             <div class="input-group">
-                                <button class="z-0 btn btn-light rounded-5 w-100 text-start border border-1"
-                                        type="button" data-bs-toggle="modal" data-bs-target="#modal-new-post"
+                                <a class="z-0 btn btn-light rounded-5 w-100 text-start border border-1"
+                                    href="<c:url value="/posts/create"/>"
+<%--                                        type="button" data-bs-toggle="modal" data-bs-target="#modal-new-post"--%>
                                 >
                                     Đăng bài mới
-                                </button>
+                                </a>
                             </div>
                         </div>
 
@@ -182,7 +183,7 @@
 <!-- Modal -->
 <div class="modal fade" id="modal-new-post" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <form action="<c:url value="/posts/create"/>" class="modal-content">
+        <form class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Tạo bài viết</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -200,13 +201,16 @@
                     </div>
                 </div>
 
+                <div class="form-floating">
+                    <textarea name="content" class="form-control" placeholder="Điền vào đây" id="floatingTextarea" style="height: 100px"></textarea>
+                    <label for="floatingTextarea">Nội dung bài viết</label>
+                    <custom:validationErrors field="email" violations="${violations}"/>
+                </div>
 
-                <textarea name="content" type="text" class="form-control bg-body-tertiary pe-5"
-                          placeholder="Nội dung bài đăng" rows="5" res></textarea>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-primary">Đăng</button>
+                <button type="button" class="btn btn-primary submit-form">Đăng</button>
             </div>
         </form>
     </div>
@@ -226,6 +230,35 @@
 <script type="module">
     const {autocomplete} = window['@algolia/autocomplete-js'];
 
+    document.addEventListener("DOMContentLoaded", function (event) {
+        document.querySelector("#modal-new-post .submit-form").addEventListener("click", () => {
+           submitForm();
+        });
+
+
+        async function submitForm() {
+            const content = document.querySelector("#modal-new-post textarea").value;
+            let formData = new FormData();
+            formData.append('content', content);
+            const res = await fetch("${pageContext.request.contextPath}/posts/create",
+                {
+                    body: formData,
+                    method: "post",
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                });
+            const data = await res.json();
+            console.log(data.content);
+            if (data) {
+                document.querySelector("#modal-new-post .form-floating .invalid-feedback").innerHTML = data.content;
+                document.querySelector("#modal-new-post .form-floating").classList.add("is-invalid");
+                document.querySelector("#modal-new-post .form-floating .form-control").classList.add("is-invalid");
+            } else {
+                window.location.replace("${pageContext.request.contextPath}/home");
+            }
+        }
+    });
 
 
     autocomplete({
@@ -252,7 +285,7 @@
                             }
 
                             return html`<span class="aa-SourceHeaderTitle">Mọi người</span>
-                        <div class="aa-SourceHeaderLine"/>`;
+                            <div class="aa-SourceHeaderLine"/>`;
                         },
                         item({item, components, html}) {
                             const url = `${pageContext.request.contextPath}/users/profile?id=\${item.id}`;
@@ -262,8 +295,8 @@
                                         <div style="width: 40px; height: 40px;">
                                             <img
                                                     class="rounded-circle"
-                                                width="40" height="40" alt=""
-                                                src="https://scontent.fsgn2-9.fna.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?_nc_cat=1&ccb=1-7&_nc_sid=2b6aad&_nc_ohc=dq56nTg8VhUAX-bh_XN&_nc_ht=scontent.fsgn2-9.fna&oh=00_AfAEa4WB4xE0WxbDlFwjeJTZ07mvORnafJYc0MOs64hnwQ&oe=658AB138"
+                                                    width="40" height="40" alt=""
+                                                    src="https://scontent.fsgn2-9.fna.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?_nc_cat=1&ccb=1-7&_nc_sid=2b6aad&_nc_ohc=dq56nTg8VhUAX-bh_XN&_nc_ht=scontent.fsgn2-9.fna&oh=00_AfAEa4WB4xE0WxbDlFwjeJTZ07mvORnafJYc0MOs64hnwQ&oe=658AB138"
                                             />
                                         </div>
                                         <div class="aa-ItemContentBody">
@@ -276,8 +309,8 @@
                                             <div class="aa-ItemContentDescription">
                                                 Bạn bè
                                                 \${components.Snippet({
-                                                  hit: item,
-                                                  attribute: 'description',
+                                                hit: item,
+                                                attribute: 'description',
                                                 })}
                                             </div>
                                         </div>

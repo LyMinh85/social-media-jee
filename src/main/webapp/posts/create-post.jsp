@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="custom" tagdir="/WEB-INF/tags" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%--@elvariable id="user" type="com.example.socialmedia.entity.User"--%>
 <!DOCTYPE html>
 <html>
 
@@ -21,11 +22,12 @@
 
             <div class="d-flex align-items-center mb-2">
               <a href="#" class="d-block link-body-emphasis text-decoration-none">
-                <img src="https://github.com/mdo.png" alt="mdo" width="40" height="40"
+                <img src="
+                <c:url value="${user.avatarImage.image.url}" />" alt="mdo" width="40" height="40"
                      class="rounded-circle">
               </a>
-              <div class="d-flex flex-column align-items-center ms-2 text-start">
-                <h6 class="card-title m-0">Mèo lười</h6>
+              <div class="d-flex flex-column align-items-start ms-2 text-start">
+                <h6 class="fw-medium m-0">${user.username}</h6>
                 <h6 class="fw-normal fs-6 text-secondary m-0">Công khai</h6>
               </div>
             </div>
@@ -37,7 +39,7 @@
             </div>
 
             <div class="d-flex justify-content-end my-1 gap-2">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+              <a href="<c:url value="/home"/>" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</a>
               <button type="submit" class="btn btn-primary submit-form">Đăng</button>
             </div>
 

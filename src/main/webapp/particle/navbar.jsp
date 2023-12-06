@@ -1,3 +1,6 @@
+<%--@elvariable id="user" type="com.example.socialmedia.entity.User"--%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <nav class="navbar navbar-expand-md bg-body-tertiary fixed-top gradient-bg shadow-sm">
     <div class="container-fluid">
         <a class="navbar-brand d-md-none d-flex align-items-center" href="#">
@@ -24,7 +27,7 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-between flex-grow-1">
                     <li class="nav-item">
-                        <a class="navbar-brand mb-0 py-0 d-none d-md-flex align-items-center" href="#">
+                        <a class="navbar-brand mb-0 py-0 d-none d-md-flex align-items-center" href="<c:url value="/home"/>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
                                  class="bi bi-bootstrap-fill" viewBox="0 0 16 16">
                                 <path d="M6.375 7.125V4.658h1.78c.973 0 1.542.457 1.542 1.237 0 .802-.604 1.23-1.764 1.23H6.375zm0 3.762h1.898c1.184 0 1.81-.48 1.81-1.377 0-.885-.65-1.348-1.886-1.348H6.375v2.725z"/>
@@ -45,38 +48,34 @@
                             <div id="autocomplete"></div>
                         </div>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item d-flex">
 
                         <c:choose>
                             <c:when test="${not empty user}">
-                                <div class="dropdown text-end">
+                                <div class="dropdown text-end align-self-center">
                                     <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32"
+                                        <img src="
+                                        <c:url value="${user.avatarImage.image.url}" />" alt="mdo" width="32" height="32"
                                              class="rounded-circle">
                                     </a>
                                     <ul class="dropdown-menu text-small dropdown-menu-end" style="">
-                                        <li><a class="dropdown-item" href="#">New project...</a></li>
-                                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                                        <li><a class="dropdown-item" href="<c:url value="/users/profile?id=${user.id}"/>">Trang cá nhân</a></li>
+                                        <li><a class="dropdown-item" href="<c:url value="/auth/sign-out"/>">Thoát</a></li>
                                     </ul>
                                 </div>
                             </c:when>
                             <c:when test="${empty user}">
-                                <div>
+                                <div class="align-self-center">
                                     <a type="button" class="btn btn-primary"
                                         href="<c:url value="/auth/sign-in"/>"
                                     >
-                                        Sign in
+                                        Đăng nhập
                                     </a>
                                     <a type="button" class="btn btn-secondary"
                                         href="<c:url value="/auth/sign-up"/>"
                                     >
-                                        Sign up
+                                        Đăng ký
                                     </a>
                                 </div>
 

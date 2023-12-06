@@ -64,7 +64,7 @@ public class SignInServlet extends HttpServlet {
                     req.setAttribute("errorMessage", "Email hoặc mật khẩu không đúng");
                 } else {
                     //      Nếu giống => Lưu User vào session => Chuyển sang trang hom
-                    req.getSession().setAttribute("loggedInUser",userDTO);
+                    req.getSession().setAttribute("user", user);
                     resp.sendRedirect(req.getContextPath() + "/");
                     return;
                 }

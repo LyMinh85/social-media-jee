@@ -48,7 +48,7 @@
                 </button>
             </div>
             <hr/>
-            <p>Chưa có tài khoản? <a href="#">Đăng ký</a></p>
+            <p>Chưa có tài khoản? <a href="<c:url value="/auth/sign-up"/>">Đăng ký</a></p>
         </form>
     </main>
 </div>

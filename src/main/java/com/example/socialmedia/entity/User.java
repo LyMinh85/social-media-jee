@@ -106,6 +106,14 @@ public class User {
         this.createAt = createAt;
     }
 
+    public AvatarImage getAvatarImage() {
+        return avatarImage;
+    }
+
+    public void setAvatarImage(AvatarImage avatarImage) {
+        this.avatarImage = avatarImage;
+    }
+
     @Override
     public String toString() {
         return "User{" +

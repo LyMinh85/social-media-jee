@@ -92,7 +92,7 @@
                 </button>
             </div>
             <hr/>
-            <p>Đã có tài khoản? <a href="#">Đăng nhập</a></p>
+            <p>Đã có tài khoản? <a href="<c:url value="/auth/sign-in"/>">Đăng nhập</a></p>
         </form>
     </main>
 </div>

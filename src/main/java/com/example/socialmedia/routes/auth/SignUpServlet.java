@@ -68,7 +68,7 @@ public class SignUpServlet extends HttpServlet {
                     boolean success = userDAO.createOne(user);
                     // Đăng ký thành công
                     if (success) {
-                        resp.sendRedirect(req.getContextPath() + "/");
+                        resp.sendRedirect(req.getContextPath() + "/auth/sign-in");
                         return;
                     } else { // Thất bại
                         req.setAttribute("errorMessage", "Opps, xảy ra lỗi");

@@ -1,6 +1,7 @@
 package com.example.socialmedia.DAO;
 
 import com.example.socialmedia.DTO.UserDTO;
+import com.example.socialmedia.entity.AvatarImage;
 import com.example.socialmedia.entity.JpaManager;
 import com.example.socialmedia.entity.User;
 import jakarta.persistence.EntityManager;
@@ -19,8 +20,9 @@ public class UserDAO {
 
         try {
             JpaManager.beginTransaction(em);
-            // Tạo Entity
-
+            // Thêm hình đại diện mặc định
+            AvatarImage avatarImage = em.find(AvatarImage.class, 1);
+            user.setAvatarImage(avatarImage);
             // Insert vào CSDL
             em.persist(user);
             JpaManager.commitTransaction(em);

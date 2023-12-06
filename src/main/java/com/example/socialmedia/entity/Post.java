@@ -1,5 +1,6 @@
 package com.example.socialmedia.entity;
 
+import com.example.socialmedia.helper.RelativeTime;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -57,8 +58,8 @@ public class Post {
         this.content = content;
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    public String getCreateAt() {
+        return RelativeTime.from(this.createAt);
     }
 
     public void setCreateAt(Date createAt) {
@@ -105,6 +106,7 @@ public class Post {
                 ", createAt=" + createAt +
                 ", numberOfLikes=" + numberOfLikes +
                 ", numberOfComments=" + numberOfComments +
+                ", user=" + user +
                 '}';
     }
 }

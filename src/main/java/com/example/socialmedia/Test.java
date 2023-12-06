@@ -3,11 +3,15 @@ package com.example.socialmedia;
 import com.example.socialmedia.DAO.FriendshipDAO;
 import com.example.socialmedia.DTO.UserDTO;
 import com.example.socialmedia.entity.*;
+import com.example.socialmedia.helper.RelativeTime;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class Test {
@@ -127,6 +131,11 @@ public class Test {
     }
 
     public static void main(String[] args) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.DATE, -30);
+        Date dateBefore30Days = cal.getTime();
 
+        System.out.println(RelativeTime.from(dateBefore30Days));
     }
 }

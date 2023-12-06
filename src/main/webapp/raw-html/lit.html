@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../style.css">
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-theme-classic"
+    />
+</head>
+<body>
+
+<div id="app-container">
+
+</div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-js"></script>
+
+<script type="module">
+    import {html, render} from "https://cdn.jsdelivr.net/npm/lit-html@3.1.0/lit-html.min.js";
+
+
+    const post = {
+        user: {
+            username: "Hello",
+            id: 1
+        },
+        content: "content",
+        createAt: new Date(),
+        numberOfLikes: 1
+    };
+    const postTemplate = (post) => html`
+                <div class="card mb-2 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <a href="/users/profile?id=${post.user.id}/>" class="d-block
+                            link-body-emphasis text-decoration-none">
+                            <img src="https://shorturl.at/s5679" alt="mdo" width="40" height="40"
+                                 class="rounded-circle">
+                            </a>
+                            <div class="d-flex flex-column ms-2 text-start">
+                                <a href="/users/profile?id=${post.user.id}/>"
+                                class="card-title text-decoration-none m-0">
+                                <h6 class="p-0 m-0">
+                                    ${post.user.username}
+                                </h6>
+                                </a>
+                                <h6 class="fw-normal fs-6 text-secondary m-0">${post.createAt}</h6>
+                            </div>
+                        </div>
+                        <p class="card-text">
+                            ${post.content}
+                        </p>
+                        <hr class="my-1"/>
+                        <div class="d-flex flex-row justify-content-between gap-2 my-0">
+                            <button class="btn btn-light fw-bold flex-fill ">
+                                <i class="bi bi-heart"></i>
+                                ${post.numberOfLikes}
+                            </button>
+
+                            <button class="btn btn-light fw-bold flex-fill">
+                                <i class="bi bi-chat-text"></i>
+                                ${post.numberOfLikes}
+                            </button>
+
+                            <button class="btn btn-light fw-bold flex-fill">
+                                <i class="bi bi-box-arrow-up"></i>
+                                Share
+                            </button>
+                        </div>
+                        <hr class="my-1"/>
+
+                        <div class="card-footer p-0 pt-2 border-0 bg-transparent">
+                            <div class="d-flex flex-start w-100">
+                                <img class="rounded-circle shadow-1-strong me-3"
+                                     src="https://shorturl.at/s5679" alt="avatar"
+                                     width="40"
+                                     height="40"/>
+                                <div class="form-outline w-100">
+
+                                    <div class="input-group mb-3">
+                                    <textarea type="text" class="rounded-5 form-control bg-body-tertiary pe-5"
+                                              placeholder="Recipient's username" rows="2"></textarea>
+                                        <button class="btn btn-primary btn-sm top-50 position-absolute end-0 rounded-circle translate-middle"
+                                                style="z-index: 6"
+                                                type="button" id="button-addon2">
+                                            <i class="bi-send-arrow-down-fill"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>`;
+
+    // Render the template to a container in the document
+    const container = document.getElementById('app-container');
+    render(postTemplate(post), container);
+
+</script>

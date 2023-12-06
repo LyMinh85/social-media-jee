@@ -6,6 +6,7 @@ import com.example.socialmedia.DAO.PostDAO;
 import com.example.socialmedia.DTO.CreatePostDTO;
 import com.example.socialmedia.DTO.SignUpUserDTO;
 import com.example.socialmedia.entity.Post;
+import com.example.socialmedia.entity.User;
 import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -26,10 +27,23 @@ import java.util.Set;
 public class CreatePostServlet  extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/posts/create-post.jsp").forward(req, resp);
+        User user = (User) req.getSession().getAttribute("user");
+        if (user == null) {
+            // Chưa đăng nhập
+            resp.sendRedirect(req.getContextPath() + "/auth/sign-in");
+        } else {
+            req.getRequestDispatcher("/posts/create-post.jsp").forward(req, resp);
+        }
+
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User user = (User) req.getSession().getAttribute("user");
+        if (user == null) {
+            // Chưa đăng nhập
+            resp.sendRedirect(req.getContextPath() + "/auth/sign-in");
+            return;
+        }
         try {
 
             boolean error = false;
@@ -50,6 +64,7 @@ public class CreatePostServlet  extends HttpServlet {
                 PostDAO postDAO = new PostDAO();
                 Post post = new Post();
                 BeanUtils.populate(post, req.getParameterMap());
+                post.setUser(user);
                 boolean result = postDAO.createPost(post);
                 if (result) {
                     resp.sendRedirect(req.getContextPath() + "/");

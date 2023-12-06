@@ -12,13 +12,13 @@ public class Image {
     @Column(name = "image_id")
     private Long id;
 
-    @Column(name = "public_id", nullable = false, length = 200)
+    @Column(name = "public_id", nullable = true, length = 200)
     private String publicId;
 
     @Column(name = "url", nullable = false, length = 300)
     private String url;
 
-    @Column(name = "upload_on", nullable = false)
+    @Column(name = "upload_on", nullable = true)
     private Date uploadOn;
 
     @PrePersist

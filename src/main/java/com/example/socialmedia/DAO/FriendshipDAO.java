@@ -101,4 +101,30 @@ public class FriendshipDAO {
         }
         return false;
     }
+
+    public FriendshipStatus isFriend(Long userId1, Long userId2) {
+        EntityManager em = JpaManager.getEntityManager();
+
+        FriendshipStatus status = null;
+        try {
+            JpaManager.beginTransaction(em);
+
+            String sql = "SELECT f.status FROM Friendship f " +
+                    "WHERE (f.user1.id = :sender AND f.user2.id = :receiver) OR " +
+                    "(f.user1.id = :receiver AND f.user2.id = :sender)";
+
+            TypedQuery<FriendshipStatus> query = em.createQuery(sql, FriendshipStatus.class);
+            query.setParameter("sender", userId1);
+            query.setParameter("receiver", userId2);
+
+            status = query.getSingleResult();
+
+            JpaManager.commitTransaction(em);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            JpaManager.closeEntityManager(em);
+        }
+        return status;
+    }
 }

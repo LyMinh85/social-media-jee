@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostDAO {
-    // Tạo hàm createPost()
-    // Tự tìm hiểu giống createOne trong UserDAO :)
     public boolean createPost(Post post )throws Exception{
         EntityManager em = JpaManager.getEntityManager();
 

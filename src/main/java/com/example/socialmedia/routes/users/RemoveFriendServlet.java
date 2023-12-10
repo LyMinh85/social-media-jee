@@ -12,8 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/users/send-friend-request")
-public class RequestFriendServlet extends HttpServlet {
+@WebServlet("/users/remove-friend")
+public class RemoveFriendServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         long userId = Long.parseLong(req.getParameter("id"));
@@ -28,7 +28,7 @@ public class RequestFriendServlet extends HttpServlet {
 
         FriendRequestDTO friendRequestDTO = new FriendRequestDTO(sender.getId(), receiver.getId());
         FriendshipDAO friendshipDAO = new FriendshipDAO();
-        friendshipDAO.sendFriendRequest(friendRequestDTO);
-        resp.sendRedirect(req.getContextPath() + "/users/profile?id=" + receiver.getId());
+        friendshipDAO.removeFriend(friendRequestDTO);
+        resp.sendRedirect(req.getContextPath() + "/users/friends");
     }
 }

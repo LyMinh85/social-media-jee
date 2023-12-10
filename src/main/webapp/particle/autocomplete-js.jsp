@@ -13,7 +13,7 @@
                 {
                     sourceId: 'users',
                     async getItems({query}) {
-                        const res = await fetch(`${pageContext.request.contextPath}/api/users?q=\${query}`);
+                        const res = await fetch(`${pageContext.request.contextPath}/api/friends?q=\${query}`);
                         const data = await res.json();
                         console.log(data);
                         return data;
@@ -27,11 +27,15 @@
                                 return null;
                             }
 
-                            return html`<span class="aa-SourceHeaderTitle">Mọi người</span>
+                            return html`<span class="aa-SourceHeaderTitle">Bạn bè</span>
                             <div class="aa-SourceHeaderLine"/>`;
                         },
                         item({item, components, html}) {
                             const url = `${pageContext.request.contextPath}/users/profile?id=\${item.id}`;
+                            let imageUrl = `\${item.avatarImage.image.url}`;
+                            if (!imageUrl.includes("https")) {
+                                imageUrl = "${pageContext.request.contextPath}/" + imageUrl;
+                            }
                             return html`
                                 <a class="aa-ItemWrapper text-decoration-none" href="\${url}">
                                     <div class="aa-ItemContent">
@@ -39,7 +43,7 @@
                                             <img
                                                     class="rounded-circle"
                                                     width="40" height="40" alt=""
-                                                    src="https://shorturl.at/s5679"
+                                                    src="\${imageUrl}"
                                             />
                                         </div>
                                         <div class="aa-ItemContentBody">

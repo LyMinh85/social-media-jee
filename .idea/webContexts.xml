@@ -8,6 +8,7 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/particle/navbar.jsp" value="file://$PROJECT_DIR$/src/main/webapp/particle" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/posts/create-post.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/raw-html/home.html" value="file://$PROJECT_DIR$/src/main/webapp/raw-html" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/raw-html/list-friend.html" value="file://$PROJECT_DIR$/src/main/webapp/raw-html" />
       </map>
     </option>
   </component>

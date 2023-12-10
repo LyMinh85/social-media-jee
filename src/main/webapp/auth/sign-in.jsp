@@ -1,18 +1,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="custom" tagdir="/WEB-INF/tags" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <html>
-<head>
-    <title>Sign in</title>
-    <%@include file="../bootstrap/css.jsp" %>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
-</head>
+<%@include file="/particle/header.jsp" %>
+
 <body class="h-100">
-<div class="form-bg d-flex align-items-center py-4 bg-body-tertiary vh-100">
+<div class="form-bg d-flex align-items-center py-4 bg-body-tertiary vh-100 p-4">
     <main class="form-sign-in w-100 m-auto bg-white shadow">
         <form id="form-sign-up" class="mx-4 mt-1" action="<c:url value="/auth/sign-in"/>" method="post">
-            <h1 class="h3 mb-3 fw-normal text-center fw-bold">Đăng ký</h1>
+            <h1 class="h3 mb-3 fw-normal text-center fw-bold">Đăng nhập</h1>
 
             <div class="input-group my-3">
                 <div class="form-floating">

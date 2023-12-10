@@ -38,7 +38,7 @@ public class User {
     @OneToMany(mappedBy = "user2")
     private List<Friendship> friendships2;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "avatar_image_id")
     private AvatarImage avatarImage;
 

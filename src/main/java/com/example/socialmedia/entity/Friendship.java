@@ -10,12 +10,12 @@ public class Friendship {
     @EmbeddedId
     FriendshipKey id;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @MapsId("user1Id")
     @JoinColumn(name = "user1_id")
     User user1; // Người gửi yêu cầu
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @MapsId("user2Id")
     @JoinColumn(name = "user2_id")
     User user2; // Người nhận yêu cầu

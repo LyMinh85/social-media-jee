@@ -12,32 +12,8 @@
 
 
 <main class="container-fluid" style="margin-top: 6rem;">
-    <c:if test="${not empty user}">
-        <div class="col-md-3 card text-center position-fixed ms-5">
-            <div class="card-body shadow-sm">
-                <div class="card-title d-flex flex-column">
-                    <div class="d-flex justify-content-center">
-                        <img class="rounded-circle shadow-1-strong mb-2"
-                             src="<c:url value="${user.avatarImage.image.url}" />" alt="avatar"
-                             width="80"
-                             height="80"/>
-                    </div>
-                    <h4 class="fw-bold text-center">${user.username}</h4>
-                </div>
-                <hr/>
-                <div class="list-group list-group-flush text-start fw-medium" style="font-size: 1.1rem">
-                    <a href="<c:url value="/users/profile?id=${user.id}"/>" class="list-group-item list-group-item-action">
-                        <i class="bi bi-person-circle me-2"></i>
-                        Xem trang cá nhân
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <i class="bi bi-people-fill me-2"></i>
-                        Bạn bè
-                    </a>
-                </div>
-            </div>
-        </div>
-    </c:if>
+    <%@include file="/users/user-card.jsp" %>
+
 
     <div class="row justify-content-center">
         <div class="col-md-5 d-flex flex-column">

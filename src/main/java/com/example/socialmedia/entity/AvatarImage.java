@@ -10,7 +10,7 @@ public class AvatarImage {
     @Column(name = "avatar_image_id")
     private Long avatarImageId;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "avatar_image_id")
     private Image image;
 

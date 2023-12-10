@@ -3,7 +3,7 @@
 
 <nav class="navbar navbar-expand-md bg-body-tertiary fixed-top gradient-bg shadow-sm">
     <div class="container-fluid">
-        <a class="navbar-brand d-md-none d-flex align-items-center" href="#">
+        <a class="navbar-brand d-md-none d-flex align-items-center" href="<c:url value="/home"/>">
             <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor"
                  class="bi bi-bootstrap-fill" viewBox="0 0 16 16">
                 <path d="M6.375 7.125V4.658h1.78c.973 0 1.542.457 1.542 1.237 0 .802-.604 1.23-1.764 1.23H6.375zm0 3.762h1.898c1.184 0 1.81-.48 1.81-1.377 0-.885-.65-1.348-1.886-1.348H6.375v2.725z"/>

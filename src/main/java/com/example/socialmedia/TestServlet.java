@@ -2,9 +2,7 @@ package com.example.socialmedia;
 
 import com.example.socialmedia.DAO.FriendshipDAO;
 import com.example.socialmedia.DTO.FriendDTO;
-import com.example.socialmedia.DTO.UserDTO;
-import com.example.socialmedia.entity.Like;
-import com.example.socialmedia.entity.User;
+import com.example.socialmedia.entity.FriendshipStatus;
 import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -19,9 +17,17 @@ import java.util.List;
 public class TestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        FriendshipDAO friendshipDAO = new FriendshipDAO();
-        List<FriendDTO> friends = friendshipDAO.getFriends(1);
-        resp.setContentType("application/json");
-        resp.getWriter().write(new Gson().toJson(friends));
+
+
+//        FriendshipDAO friendshipDAO = new FriendshipDAO();
+//        User user = (User) req.getSession().getAttribute("user");
+//        if (user == null) {
+//            resp.sendRedirect(req.getContextPath() + "/auth/sign-in");
+//            return;
+//        }
+
+//        List<FriendDTO> friends = friendshipDAO.getRequestFriends(7L, FriendshipStatus.PENDING);
+//        resp.setContentType("application/json");
+//        resp.getWriter().write(new Gson().toJson(friends));
     }
 }

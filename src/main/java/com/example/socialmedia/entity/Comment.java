@@ -1,5 +1,6 @@
 package com.example.socialmedia.entity;
 
+import com.example.socialmedia.helper.RelativeTime;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -16,7 +17,7 @@ public class Comment {
     private String content;
 
     @Column(name = "create_at", nullable = false)
-    private Date createAt;
+    public Date createAt;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -29,6 +30,7 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "parent_comment_id")
     private Comment parentComment;
+
 
     @PrePersist
     protected void onCreate() {
@@ -51,8 +53,8 @@ public class Comment {
         this.content = content;
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    public String getCreateAt() {
+        return RelativeTime.from(this.createAt);
     }
 
     public void setCreateAt(Date createAt) {

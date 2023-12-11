@@ -1,8 +1,9 @@
-package com.example.socialmedia.routes;
+package com.example.socialmedia.routes.posts;
 
-
+import com.example.socialmedia.DAO.CommentDAO;
 import com.example.socialmedia.DAO.PostDAO;
 import com.example.socialmedia.DTO.PostDTO;
+import com.example.socialmedia.entity.Comment;
 import com.example.socialmedia.entity.Post;
 import com.example.socialmedia.entity.User;
 import jakarta.servlet.ServletException;
@@ -12,26 +13,30 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(urlPatterns = {"/home"})
-public class HomeServlet extends HttpServlet {
+@WebServlet("/posts/detail")
+public class DetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Long postId = Long.valueOf(req.getParameter("id"));
         PostDAO postDAO = new PostDAO();
+
         User user = (User) req.getSession().getAttribute("user");
 
-        List<PostDTO> posts = new ArrayList<>();
+        PostDTO post;
         if (user == null) {
-            posts = postDAO.findAll();
+            post = postDAO.findByPostId(postId);
         } else {
-            posts = postDAO.findAll(user);
+            post = postDAO.findByPostId(postId, user);
         }
-        req.setAttribute("posts", posts);
+        req.setAttribute("post", post);
 
-        req.getRequestDispatcher("home.jsp").forward(req, resp);
+
+        CommentDAO commentDAO = new CommentDAO();
+        List<Comment> comments = commentDAO.filterByPostId(postId);
+        req.setAttribute("comments", comments);
+
+        req.getRequestDispatcher("/posts/detail.jsp").forward(req, resp);
     }
-
-
 }

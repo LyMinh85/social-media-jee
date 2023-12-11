@@ -8,6 +8,7 @@ public class UserDTO {
     private AvatarImage avatarImage;
 
 
+
     public Long getId() {
         return id;
     }

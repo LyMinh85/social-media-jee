@@ -75,6 +75,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-js"></script>
 
 <%@include file="particle/autocomplete-js.jsp"%>
+<%@include file="/particle/scripts.jsp"%>
 
 
 </body>

@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--@elvariable id="user" type="com.example.socialmedia.entity.User"--%>
-<%--@elvariable id="post" type="com.example.socialmedia.entity.Post"--%>
+<%--@elvariable id="post" type="com.example.socialmedia.DTO.PostDTO"--%>
 <div class="card mb-2 shadow-sm">
     <%--      Begin content              --%>
     <div class="card-body">
@@ -27,15 +27,29 @@
         <hr class="my-1"/>
         <%--       buttons                --%>
         <div class="d-flex flex-row justify-content-between gap-2 my-0">
-            <button class="btn btn-light fw-bold flex-fill ">
-                <i class="bi bi-heart"></i>
-                ${post.numberOfLikes}
+            <button onclick="processLike(this, ${post.id})" class="btn btn-light fw-bold flex-fill ">
+                <c:if test="${not empty post.liked}">
+                    <c:if test="${post.liked}">
+                        <i class="bi bi-suit-heart-fill"></i>
+                    </c:if>
+                    <c:if test="${not post.liked}">
+                        <i class="bi bi-suit-heart"></i>
+                    </c:if>
+                </c:if>
+                <c:if test="${empty post.liked}">
+                    <i class="bi bi-suit-heart"></i>
+                </c:if>
+                <span>
+                    ${post.numberOfLikes}
+                </span>
             </button>
 
-            <button class="btn btn-light fw-bold flex-fill">
+            <a href="<c:url value="/posts/detail?id=${post.id}"/>" class="btn btn-light fw-bold flex-fill">
                 <i class="bi bi-chat-text"></i>
-                ${post.numberOfLikes}
-            </button>
+                <span>
+                    ${post.numberOfComments}
+                </span>
+            </a>
 
             <button class="btn btn-light fw-bold flex-fill">
                 <i class="bi bi-box-arrow-up"></i>
@@ -43,33 +57,6 @@
             </button>
         </div>
         <hr class="my-1"/>
-        <%--     End   buttons                --%>
-
-<%--        <div class="card-footer p-0 pt-2 border-0 bg-transparent">--%>
-<%--            <div class="d-flex flex-start w-100">--%>
-<%--                <img class="rounded-circle shadow-1-strong me-3"--%>
-<%--                     src="<c:url value="${user.avatarImage.image.url}" />" alt="avatar"--%>
-<%--                     width="40"--%>
-<%--                     height="40"/>--%>
-<%--                <div class="form-outline w-100">--%>
-
-<%--                    <div class="input-group mb-3">--%>
-<%--                                    <textarea type="text" class="rounded-5 form-control bg-body-tertiary pe-5"--%>
-<%--                                              placeholder="Recipient's username" rows="2"></textarea>--%>
-<%--                        <button class="btn btn-primary btn-sm top-50 position-absolute end-0 rounded-circle translate-middle"--%>
-<%--                                style="z-index: 6"--%>
-<%--                                type="button" id="button-addon2">--%>
-<%--                            <i class="bi-send-arrow-down-fill"></i>--%>
-<%--                        </button>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-
-
-<%--            </div>--%>
-<%--        </div>--%>
-        <!--      End write comment -->
-
-        <!--            End -->
     </div>
 
 

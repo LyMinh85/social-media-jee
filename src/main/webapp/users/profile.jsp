@@ -30,7 +30,7 @@
             </div>
 
 
-            <%--@elvariable id="posts" type="java.util.List<com.example.socialmedia.entity.Post>"--%>
+            <%--@elvariable id="posts" type="java.util.List<com.example.socialmedia.DTO.PostDTO>"--%>
             <c:forEach items="${posts}" var="post">
                 <c:set var="post" value="${post}" scope="request"/>
                 <jsp:include page="/posts/post-card.jsp"/>

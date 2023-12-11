@@ -3,6 +3,7 @@ package com.example.socialmedia.routes.users;
 import com.example.socialmedia.DAO.FriendshipDAO;
 import com.example.socialmedia.DAO.PostDAO;
 import com.example.socialmedia.DAO.UserDAO;
+import com.example.socialmedia.DTO.PostDTO;
 import com.example.socialmedia.entity.FriendshipStatus;
 import com.example.socialmedia.entity.Post;
 import com.example.socialmedia.entity.User;
@@ -25,15 +26,18 @@ public class ProfileServlet extends HttpServlet {
         req.setAttribute("userProfile", userProfile);
 
         PostDAO postDAO = new PostDAO();
-        List<Post> posts = postDAO.findByUserId(userId);
-        req.setAttribute("posts", posts);
+
 
         User currentLoginUser = (User) req.getSession().getAttribute("user");
         if (currentLoginUser != null) {
             FriendshipDAO friendshipDAO = new FriendshipDAO();
             FriendshipStatus friendshipStatus = friendshipDAO.isFriend(userProfile.getId(), currentLoginUser.getId());
             req.setAttribute("friendshipStatus", friendshipStatus);
-            System.out.println(friendshipStatus);
+            List<PostDTO> posts = postDAO.findByUserId(userId, currentLoginUser);
+            req.setAttribute("posts", posts);
+        } else {
+            List<PostDTO> posts = postDAO.findByUserId(userId);
+            req.setAttribute("posts", posts);
         }
 
         req.getRequestDispatcher("/users/profile.jsp").forward(req, resp);

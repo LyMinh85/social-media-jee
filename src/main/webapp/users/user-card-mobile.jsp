@@ -60,6 +60,10 @@
                     <i class="bi bi-people-fill me-2"></i>
                     Bạn bè
                 </a>
+                <a href="<c:url value="/users/edit"/>" class="list-group-item list-group-item-action">
+                    <i class="bi bi-people-fill me-2"></i>
+                    Chỉnh sửa thông tin cá nhân
+                </a>
             </div>
         </c:if>
 

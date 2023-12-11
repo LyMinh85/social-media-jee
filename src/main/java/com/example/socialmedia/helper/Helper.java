@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Helper {
+    public static String IMAGES_PATH = "/images";
+
     public static void responseJson(HttpServletResponse resp, Object object) throws IOException {
         String json = new Gson().toJson(object);
         PrintWriter out = resp.getWriter();

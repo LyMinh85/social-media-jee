@@ -2,6 +2,7 @@ package com.example.socialmedia.DAO;
 
 import com.example.socialmedia.DTO.UserDTO;
 import com.example.socialmedia.entity.AvatarImage;
+import com.example.socialmedia.entity.Image;
 import com.example.socialmedia.entity.JpaManager;
 import com.example.socialmedia.entity.User;
 import jakarta.persistence.EntityManager;
@@ -91,5 +92,25 @@ public class UserDAO {
             JpaManager.closeEntityManager(em);
         }
         return users;
+    }
+
+    public User updateUser(User user) {
+        EntityManager em = JpaManager.getEntityManager();
+
+        User updatedUser = null;
+        try {
+            JpaManager.beginTransaction(em);
+
+            updatedUser = em.merge(user);
+            em.merge(user.getAvatarImage().getImage());
+
+            JpaManager.commitTransaction(em);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JpaManager.rollbackTransaction(em);
+        } finally {
+            JpaManager.closeEntityManager(em);
+        }
+        return user;
     }
 }

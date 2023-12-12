@@ -22,7 +22,7 @@ public class FriendshipDAO {
                     FROM Friendship f
                     WHERE f.user2.id = :userId AND f.status = :status
                     UNION
-                    SELECT NEW com.example.socialmedia.DTO.FriendDTO(f.user1.id, f.user1.username, f.user1.avatarImage, f.status) as friend
+                    SELECT NEW com.example.socialmedia.DTO.FriendDTO(f.user2.id, f.user2.username, f.user2.avatarImage, f.status) as friend
                     FROM Friendship f
                     WHERE f.user1.id = :userId AND f.status = :status
                     """;

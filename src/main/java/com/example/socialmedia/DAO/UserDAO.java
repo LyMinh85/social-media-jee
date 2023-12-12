@@ -94,15 +94,16 @@ public class UserDAO {
         return users;
     }
 
-    public User updateUser(User user) {
+    public Image createImage(String url) {
         EntityManager em = JpaManager.getEntityManager();
 
-        User updatedUser = null;
+        Image image = null;
         try {
             JpaManager.beginTransaction(em);
 
-            updatedUser = em.merge(user);
-            em.merge(user.getAvatarImage().getImage());
+            image = new Image();
+            image.setUrl(url);
+            em.persist(image);
 
             JpaManager.commitTransaction(em);
         } catch (Exception e) {
@@ -111,6 +112,54 @@ public class UserDAO {
         } finally {
             JpaManager.closeEntityManager(em);
         }
-        return user;
+        return image;
+    }
+
+    public AvatarImage createAvatarImage(Long imageId) {
+        EntityManager em = JpaManager.getEntityManager();
+
+        AvatarImage avatarImage = null;
+        try {
+            JpaManager.beginTransaction(em);
+
+            Image image = em.find(Image.class, imageId);
+
+            avatarImage = new AvatarImage();
+            avatarImage.setAvatarImageId(imageId);
+            avatarImage.setImage(image);
+            em.persist(avatarImage);
+
+            JpaManager.commitTransaction(em);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JpaManager.rollbackTransaction(em);
+        } finally {
+            JpaManager.closeEntityManager(em);
+        }
+        return avatarImage;
+    }
+
+    public User updateUser(User user) {
+        Image image = createImage(user.getAvatarImage().getImage().getUrl());
+        AvatarImage avatarImage = createAvatarImage(image.getId());
+
+        EntityManager em = JpaManager.getEntityManager();
+
+        User updatedUser = null;
+        try {
+            JpaManager.beginTransaction(em);
+
+            updatedUser = em.merge(user);
+            updatedUser.setAvatarImage(avatarImage);
+            em.merge(user.getAvatarImage());
+
+            JpaManager.commitTransaction(em);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JpaManager.rollbackTransaction(em);
+        } finally {
+            JpaManager.closeEntityManager(em);
+        }
+        return updatedUser;
     }
 }

@@ -11,6 +11,8 @@
 
 <%@include file="../particle/navbar.jsp" %>
 
+<%@include file="/users/request-friends-card.jsp"%>
+
 
 <main class="container-fluid" style="margin-top: 6rem;">
   <div class="row justify-content-center">
@@ -21,11 +23,13 @@
           <form id="form-create-post" action="<c:url value="/posts/create"/>" method="post" class="d-flex flex-start flex-column w-100">
 
             <div class="d-flex align-items-center mb-2">
-              <a href="#" class="d-block link-body-emphasis text-decoration-none">
-                <img src="
-                <c:url value="${user.avatarImage.image.url}" />" alt="mdo" width="40" height="40"
-                     class="rounded-circle">
+              <a href="<c:url value="/users/profile?id=${user.id}" /> " class="d-block link-body-emphasis text-decoration-none">
+                <img class="img-fluid rounded-circle shadow-1-strong me-3"
+                     src="<c:url value="${user.avatarImage.image.url}" />" alt="avatar"
+                     width="40" height="40"
+                     style="object-fit: cover;"/>
               </a>
+
               <div class="d-flex flex-column align-items-start ms-2 text-start">
                 <h6 class="fw-medium m-0">${user.username}</h6>
                 <h6 class="fw-normal fs-6 text-secondary m-0">Công khai</h6>

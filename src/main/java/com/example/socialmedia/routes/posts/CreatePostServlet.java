@@ -2,8 +2,10 @@ package com.example.socialmedia.routes.posts;
 
 
 import com.example.socialmedia.BeanValidator;
+import com.example.socialmedia.DAO.FriendshipDAO;
 import com.example.socialmedia.DAO.PostDAO;
 import com.example.socialmedia.DTO.CreatePostDTO;
+import com.example.socialmedia.DTO.FriendDTO;
 import com.example.socialmedia.DTO.SignUpUserDTO;
 import com.example.socialmedia.entity.Post;
 import com.example.socialmedia.entity.User;
@@ -20,6 +22,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import javax.sql.rowset.serial.SerialException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -44,6 +47,10 @@ public class CreatePostServlet  extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/auth/sign-in");
             return;
         }
+        FriendshipDAO friendshipDAO = new FriendshipDAO();
+        List<FriendDTO> requestFriends = friendshipDAO.getRequestFriends(user.getId());
+        req.setAttribute("requestFriends", requestFriends);
+
         try {
 
             boolean error = false;

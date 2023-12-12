@@ -3,6 +3,7 @@ package com.example.socialmedia.routes.users;
 import com.example.socialmedia.DAO.FriendshipDAO;
 import com.example.socialmedia.DAO.PostDAO;
 import com.example.socialmedia.DAO.UserDAO;
+import com.example.socialmedia.DTO.FriendDTO;
 import com.example.socialmedia.DTO.PostDTO;
 import com.example.socialmedia.entity.FriendshipStatus;
 import com.example.socialmedia.entity.Post;
@@ -35,6 +36,9 @@ public class ProfileServlet extends HttpServlet {
             req.setAttribute("friendshipStatus", friendshipStatus);
             List<PostDTO> posts = postDAO.findByUserId(userId, currentLoginUser);
             req.setAttribute("posts", posts);
+
+            List<FriendDTO> requestFriends = friendshipDAO.getRequestFriends(currentLoginUser.getId());
+            req.setAttribute("requestFriends", requestFriends);
         } else {
             List<PostDTO> posts = postDAO.findByUserId(userId);
             req.setAttribute("posts", posts);

@@ -57,7 +57,7 @@
                                        data-bs-toggle="dropdown" aria-expanded="false">
                                         <img src="
                                         <c:url value="${user.avatarImage.image.url}" />" alt="mdo" width="32" height="32"
-                                             class="rounded-circle">
+                                             class="img-fluid rounded-circle">
                                     </a>
                                     <ul class="dropdown-menu text-small dropdown-menu-end" style="">
                                         <li><a class="dropdown-item" href="<c:url value="/users/profile?id=${user.id}"/>">Trang cá nhân</a></li>

@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 @Table(name = "avatar_image")
 public class AvatarImage {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "avatar_image_id")
     private Long avatarImageId;
 

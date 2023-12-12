@@ -14,6 +14,8 @@
 <main class="container-fluid" style="margin-top: 6rem;">
     <%@include file="/users/user-card.jsp" %>
 
+    <%@include file="/users/request-friends-card.jsp"%>
+
 
     <div class="row justify-content-center">
         <div class="col-md-5 d-flex flex-column">
@@ -23,16 +25,16 @@
                     <div class="d-flex flex-start w-100">
                         <c:choose>
                             <c:when test="${not empty user}">
-                                <img class="rounded-circle shadow-1-strong me-3"
+                                <img class="img-fluid rounded-circle shadow-1-strong me-3"
                                      src="<c:url value="${user.avatarImage.image.url}" />" alt="avatar"
-                                     width="40"
-                                     height="40"/>
+                                     width="40" height="40"
+                                     style="object-fit: cover;"/>
                             </c:when>
                             <c:when test="${empty user}">
-                                <img class="rounded-circle shadow-1-strong me-3"
+                                <img class="img-fluid rounded-circle shadow-1-strong me-3"
                                      src="<c:url value="/images/default-avatar.png" />" alt="avatar"
-                                     width="40"
-                                     height="40"/>
+                                     width="40" height="40"
+                                     style="object-fit: cover;"/>
                             </c:when>
                         </c:choose>
 

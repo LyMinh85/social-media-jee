@@ -1,7 +1,9 @@
 package com.example.socialmedia.routes;
 
 
+import com.example.socialmedia.DAO.FriendshipDAO;
 import com.example.socialmedia.DAO.PostDAO;
+import com.example.socialmedia.DTO.FriendDTO;
 import com.example.socialmedia.DTO.PostDTO;
 import com.example.socialmedia.entity.Post;
 import com.example.socialmedia.entity.User;
@@ -27,6 +29,9 @@ public class HomeServlet extends HttpServlet {
             posts = postDAO.findAll();
         } else {
             posts = postDAO.findAll(user);
+            FriendshipDAO friendshipDAO = new FriendshipDAO();
+            List<FriendDTO> requestFriends = friendshipDAO.getRequestFriends(user.getId());
+            req.setAttribute("requestFriends", requestFriends);
         }
         req.setAttribute("posts", posts);
 

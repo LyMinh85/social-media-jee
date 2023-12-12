@@ -12,16 +12,16 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/users/reject-friend-request")
-public class RejectFriendRequestServlet extends HttpServlet {
+@WebServlet("/users/unsent-friend-request")
+public class UnsentFriendRequestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         long userId = Long.parseLong(req.getParameter("id"));
         UserDAO userDAO = new UserDAO();
-        User sender = userDAO.findOne(userId);
-        User receiver = (User) req.getSession().getAttribute("user");
+        User receiver = userDAO.findOne(userId);
+        User sender = (User) req.getSession().getAttribute("user");
 
-        if (receiver == null) {
+        if (sender == null) {
             resp.sendRedirect(req.getContextPath() + "/home");
             return;
         }
@@ -29,6 +29,6 @@ public class RejectFriendRequestServlet extends HttpServlet {
         FriendRequestDTO friendRequestDTO = new FriendRequestDTO(sender.getId(), receiver.getId());
         FriendshipDAO friendshipDAO = new FriendshipDAO();
         friendshipDAO.removeFriend(friendRequestDTO);
-        resp.sendRedirect(req.getContextPath() + "/users/friends");
+        resp.sendRedirect(req.getContextPath() + "/users/profile?id=" + receiver.getId());
     }
 }

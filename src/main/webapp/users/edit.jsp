@@ -19,6 +19,8 @@
 <main class="container-fluid" style="margin-top: 6rem;">
     <%@include file="/users/user-card.jsp" %>
 
+    <%@include file="/users/request-friends-card.jsp"%>
+
 
     <div class="row justify-content-center">
         <div class="col-md-5 d-flex flex-column">

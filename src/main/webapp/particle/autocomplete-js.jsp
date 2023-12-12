@@ -41,7 +41,7 @@
                                     <div class="aa-ItemContent">
                                         <div style="width: 40px; height: 40px;">
                                             <img
-                                                    class="rounded-circle"
+                                                    class="img-fluid rounded-circle"
                                                     width="40" height="40" alt=""
                                                     src="\${imageUrl}"
                                             />

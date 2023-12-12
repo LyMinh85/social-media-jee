@@ -6,9 +6,9 @@
     <div class="card-body">
         <%--        Content                --%>
         <div class="d-flex align-items-center">
-            <a href="#" class="d-block link-body-emphasis text-decoration-none">
+            <a href="<c:url value="/users/profile?id=${post.user.id}"/>" class="d-block link-body-emphasis text-decoration-none">
                 <img src="<c:url value="${post.user.avatarImage.image.url}" />" alt="mdo" width="40" height="40"
-                     class="rounded-circle">
+                     class="img-fluid rounded-circle">
             </a>
             <div class="d-flex flex-column ms-2 text-start">
                 <a href="<c:url value="/users/profile?id=${post.user.id}"/>"
@@ -17,7 +17,7 @@
                         ${post.user.username}
                     </h6>
                 </a>
-                <h6 class="fw-normal fs-6 text-secondary m-0">${post.createAt}</h6>
+                <h6 class="fw-normal fs-6 text-secondary m-0 uppercase-first-letter">${post.createAt}</h6>
             </div>
         </div>
         <p class="card-text">

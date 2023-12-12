@@ -1,8 +1,10 @@
 package com.example.socialmedia.routes.users;
 
 import com.example.socialmedia.BeanValidator;
+import com.example.socialmedia.DAO.FriendshipDAO;
 import com.example.socialmedia.DAO.UserDAO;
 import com.example.socialmedia.DTO.EditUserDTO;
+import com.example.socialmedia.DTO.FriendDTO;
 import com.example.socialmedia.DTO.SignUpUserDTO;
 import com.example.socialmedia.entity.AvatarImage;
 import com.example.socialmedia.entity.Image;
@@ -21,6 +23,7 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Set;
 
 @MultipartConfig()
@@ -35,6 +38,10 @@ public class EditServlet extends HttpServlet {
             return;
         }
 
+        FriendshipDAO friendshipDAO = new FriendshipDAO();
+        List<FriendDTO> requestFriends = friendshipDAO.getRequestFriends(user.getId());
+        req.setAttribute("requestFriends", requestFriends);
+
         req.setAttribute("editUserDTO", user);
 
         req.getRequestDispatcher("/users/edit.jsp").forward(req, resp);
@@ -48,6 +55,10 @@ public class EditServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/auth/sign-in");
             return;
         }
+
+        FriendshipDAO friendshipDAO = new FriendshipDAO();
+        List<FriendDTO> requestFriends = friendshipDAO.getRequestFriends(user.getId());
+        req.setAttribute("requestFriends", requestFriends);
 
 
         try {

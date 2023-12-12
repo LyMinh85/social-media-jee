@@ -25,8 +25,6 @@ public class FriendsServlet extends HttpServlet {
         FriendshipDAO friendshipDAO = new FriendshipDAO();
         List<FriendDTO> friends = friendshipDAO.getFriends(user.getId());
         List<FriendDTO> requestFriends = friendshipDAO.getRequestFriends(user.getId());
-        System.out.println(friends);
-        System.out.println(requestFriends);
         req.setAttribute("friends", friends);
         req.setAttribute("requestFriends", requestFriends);
 

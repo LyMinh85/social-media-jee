@@ -29,7 +29,7 @@
                         <c:forEach items="${requestFriends}" var="requestFriend">
                             <li class="list-group-item d-flex p-3 justify-content-between align-items-center">
                                 <div class="d-flex flex-row align-items-center">
-                                    <img class="rounded-circle shadow-1-strong me-2"
+                                    <img class="img-fluid rounded-circle shadow-1-strong me-2"
                                          src="<c:url value="${requestFriend.avatarImage.image.url}" />"
                                          alt="avatar"
                                          width="40"
@@ -68,7 +68,7 @@
                         <c:forEach items="${friends}" var="friend">
                             <li class="list-group-item d-flex p-3 justify-content-between align-items-center">
                                 <div class="d-flex flex-row align-items-center">
-                                    <img class="rounded-circle shadow-1-strong me-2"
+                                    <img class="img-fluid rounded-circle shadow-1-strong me-2"
                                          src="<c:url value="${friend.avatarImage.image.url}" />" alt="avatar"
                                          width="40"
                                          height="40"/>

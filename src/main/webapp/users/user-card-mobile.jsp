@@ -8,7 +8,7 @@
     <div class="card-body">
         <div class="card-title d-flex flex-column align-items-center">
             <div class="d-flex justify-content-center">
-                <img class="rounded-circle shadow-1-strong mb-2"
+                <img class="img-fluid rounded-circle shadow-1-strong mb-2"
                      src="<c:url value="${userProfile.avatarImage.image.url}" />" alt="avatar"
                      width="80"
                      height="80"/>
@@ -25,7 +25,7 @@
                         </c:when>
                         <c:when test="${friendshipStatus == 'PENDING'}">
                             <a type="button" class="btn btn-primary w-50"
-                               href="<c:url value="/users/send-friend-request?id=${userProfile.id}"/>"
+                               href="<c:url value="/users/unsent-friend-request?id=${userProfile.id}"/>"
                             >
                                 Hủy lời mời
                             </a>

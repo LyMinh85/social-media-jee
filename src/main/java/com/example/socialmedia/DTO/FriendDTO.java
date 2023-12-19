@@ -2,20 +2,15 @@ package com.example.socialmedia.DTO;
 
 import com.example.socialmedia.entity.AvatarImage;
 import com.example.socialmedia.entity.FriendshipStatus;
-import com.example.socialmedia.entity.User;
 
 public class FriendDTO {
     private Long id;
-    private String username;
-    private AvatarImage avatarImage;
-    private FriendshipStatus friendshipStatus;
 
-    public FriendDTO(Long id, String username, AvatarImage avatarImage, FriendshipStatus friendshipStatus) {
-        this.id = id;
-        this.username = username;
-        this.avatarImage = avatarImage;
-        this.friendshipStatus = friendshipStatus;
-    }
+    private String username;
+
+    private AvatarImage avatarImage;
+
+    private FriendshipStatus friendShipStatus;
 
     public Long getId() {
         return id;
@@ -41,11 +36,18 @@ public class FriendDTO {
         this.avatarImage = avatarImage;
     }
 
-    public FriendshipStatus getFriendshipStatus() {
-        return friendshipStatus;
+    public FriendshipStatus getFriendShipStatus() {
+        return friendShipStatus;
     }
 
-    public void setFriendshipStatus(FriendshipStatus friendshipStatus) {
-        this.friendshipStatus = friendshipStatus;
+    public void setFriendShipStatus(FriendshipStatus friendShipStatus) {
+        this.friendShipStatus = friendShipStatus;
+    }
+
+    public FriendDTO(Long id, String username, AvatarImage avatarImage, FriendshipStatus friendShipStatus) {
+        this.id = id;
+        this.username = username;
+        this.avatarImage = avatarImage;
+        this.friendShipStatus = friendShipStatus;
     }
 }

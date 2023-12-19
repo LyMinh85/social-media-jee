@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "user")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //annotation tu tao ID tang dan
     @Column(name = "user_id")
     private Long id;
 
@@ -32,10 +32,11 @@ public class User {
     @Column(name = "create_at", nullable = false)
     private Date createAt;
 
-    @OneToMany(mappedBy = "user1")
+
+    @OneToMany(mappedBy = "user1")              //khong can thiet
     private List<Friendship> friendships1;
 
-    @OneToMany(mappedBy = "user2")
+    @OneToMany(mappedBy = "user2")              //khong can thiet
     private List<Friendship> friendships2;
 
     @OneToOne(fetch = FetchType.EAGER)

@@ -2,7 +2,8 @@ package com.example.socialmedia.routes.auth;
 
 import com.example.socialmedia.BeanValidator;
 import com.example.socialmedia.DAO.UserDAO;
-import com.example.socialmedia.DTO.SignUpUserDTO;
+import com.example.socialmedia.DTO.SignInDTO;
+import com.example.socialmedia.DTO.SignUpDTO;
 import com.example.socialmedia.entity.User;
 import com.google.common.hash.Hashing;
 import jakarta.servlet.ServletException;
@@ -20,69 +21,37 @@ import java.util.Set;
 @WebServlet("/auth/sign-up")
 public class SignUpServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/auth/sign-up.jsp").forward(req, resp);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/auth/sign-up.jsp").forward(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String rePassword = req.getParameter("re-password");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            boolean error = false;
-            // Đổ dữ liệu input vào DTO
-            SignUpUserDTO userDTO = new SignUpUserDTO();
-            BeanUtils.populate(userDTO, req.getParameterMap());
+            SignUpDTO signUpDTO = new SignUpDTO();
+            BeanUtils.populate(signUpDTO, request.getParameterMap());
 
-            // Kiểm tra các thuộc tính email, username, password, gender có
-            // hợp lệ hay không
-            Set<ConstraintViolation<SignUpUserDTO>> violations = BeanValidator.getValidator().validate(userDTO);
-            // Nếu tồn tại ít nhất 1 dữ liệu ko hợp lệ
+            Set<ConstraintViolation<SignUpDTO>> violations = BeanValidator.getValidator().validate(signUpDTO);
+
             if (!violations.isEmpty()) {
-                error = true;
-                req.setAttribute("violations", violations);
+                request.setAttribute("violations", violations);
             }
 
-            // Kiểm tra mật khẩu nhập lại có đúng hay không
-            if (!userDTO.getPassword().equals(rePassword)) {
-                req.setAttribute("invalidRePassword", true);
-                error = true;
-            }
-            // Truyền dữ liệu đã nhập vào jsp
-            req.setAttribute("user", userDTO);
-
-            // Tất cả dữ liệu đều hợp lệ
-            if (!error) {
+            if (violations.isEmpty()) {
                 UserDAO userDAO = new UserDAO();
-                // Mã hóa mật khẩu
-                String hashedPassword = Hashing.sha256()
-                        .hashString(userDTO.getPassword(), StandardCharsets.UTF_8)
-                        .toString();
-
-                // Đổ dữ liệu vào user entity và gán mật khẩu đã mã hóa vào
                 User user = new User();
-                BeanUtils.populate(user, req.getParameterMap());
-                user.setPassword(hashedPassword);
-
-                // Thực hiện tạo tài khoản mới
-                try {
-                    boolean success = userDAO.createOne(user);
-                    // Đăng ký thành công
-                    if (success) {
-                        resp.sendRedirect(req.getContextPath() + "/auth/sign-in");
-                        return;
-                    } else { // Thất bại
-                        req.setAttribute("errorMessage", "Opps, xảy ra lỗi");
-                    }
-                } catch (Exception e) { // Email đã tồn tại
-                    req.setAttribute("errorMessage", "Email đã tồn tại");
-                }
-
+                BeanUtils.populate(user, request.getParameterMap()); // đổ dữ liệu người dùng nhập vào
+                String hashWord = Hashing.sha256().hashString(signUpDTO.getPassword(),
+                        StandardCharsets.UTF_8).toString();
+                user.setPassword(hashWord);
+                user = userDAO.createUSer(user); // lưu vào cơ sở dữ liệu
+                response.sendRedirect(request.getContextPath() + "/auth/sign-in");
+                return;
             }
+
         } catch (Exception e) {
-            e.printStackTrace();
             throw new RuntimeException(e);
         }
-        // Render UI
-        req.getRequestDispatcher("/auth/sign-up.jsp").forward(req, resp);
+        request.getRequestDispatcher("/auth/sign-up.jsp").forward(request, response);
     }
 }

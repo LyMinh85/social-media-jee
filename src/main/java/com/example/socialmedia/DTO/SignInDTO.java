@@ -4,15 +4,14 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 
-public class SignInUserDTO {
-    @NotEmpty(message = "Email không được để trống")
-    @Email(message = "Không đúng định dạng email")
+public class SignInDTO {
+
+    @Email(message = "Email không hợp lệ. Vui lòng điền đúng email !")
+    @NotEmpty(message = "Vui lòng điền email !")
     private String email;
 
-    @NotEmpty(message = "Password không được để trống")
+    @NotEmpty(message = "Vui lòng điền mật khẩu !")
     private String password;
-
-
 
     public String getEmail() {
         return email;

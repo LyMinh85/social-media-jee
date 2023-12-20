@@ -5,12 +5,8 @@ import com.example.socialmedia.DAO.FriendshipDAO;
 import com.example.socialmedia.DAO.UserDAO;
 import com.example.socialmedia.DTO.EditUserDTO;
 import com.example.socialmedia.DTO.FriendDTO;
-import com.example.socialmedia.DTO.SignUpUserDTO;
-import com.example.socialmedia.entity.AvatarImage;
-import com.example.socialmedia.entity.Image;
 import com.example.socialmedia.entity.User;
 import com.example.socialmedia.helper.Helper;
-import com.google.common.hash.Hashing;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,7 +18,6 @@ import jakarta.validation.ConstraintViolation;
 import org.apache.commons.beanutils.BeanUtils;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Set;
 

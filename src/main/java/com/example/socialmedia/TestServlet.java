@@ -1,9 +1,5 @@
 package com.example.socialmedia;
 
-import com.example.socialmedia.DAO.FriendshipDAO;
-import com.example.socialmedia.DTO.FriendDTO;
-import com.example.socialmedia.entity.FriendshipStatus;
-import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,7 +7,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/test")
 public class TestServlet extends HttpServlet {

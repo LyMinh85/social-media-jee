@@ -6,7 +6,6 @@ import com.example.socialmedia.DAO.UserDAO;
 import com.example.socialmedia.DTO.FriendDTO;
 import com.example.socialmedia.DTO.PostDTO;
 import com.example.socialmedia.entity.FriendshipStatus;
-import com.example.socialmedia.entity.Post;
 import com.example.socialmedia.entity.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

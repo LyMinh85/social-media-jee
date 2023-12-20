@@ -10,38 +10,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FriendshipDAO {
-    // Tìm tất cả bạn bè của userId
-    public List<FriendDTO> getFriends(Long userId) {
-        EntityManager em = JpaManager.getEntityManager();
+
+    public  List<FriendDTO> getFriends(Long userId){
+        EntityManager entityManager = JpaManager.getEntityManager();
         List<FriendDTO> friends = new ArrayList<>();
+
         try {
-            JpaManager.beginTransaction(em);
+            JpaManager.beginTransaction(entityManager);
 
             String sql = """
-                    SELECT NEW com.example.socialmedia.DTO.FriendDTO(f.user1.id, f.user1.username, f.user1.avatarImage, f.status) as friend
-                    FROM Friendship f
-                    WHERE f.user2.id = :userId AND f.status = :status
+                    SELECT NEW com.example.socialmedia.DTO.FriendDTO(fs.user1.id, fs.user1.username, fs.user1.avatarImage, fs.status) as friend
+                    FROM Friendship fs
+                    join fs.user1
+                    join fs.user1.avatarImage
+                    WHERE fs.user2.id = :userId AND fs.status = :status
                     UNION
-                    SELECT NEW com.example.socialmedia.DTO.FriendDTO(f.user2.id, f.user2.username, f.user2.avatarImage, f.status) as friend
-                    FROM Friendship f
-                    WHERE f.user1.id = :userId AND f.status = :status
+                    SELECT NEW com.example.socialmedia.DTO.FriendDTO(fs.user2.id, fs.user2.username, fs.user2.avatarImage, fs.status) as friend
+                    FROM Friendship fs
+                    join fs.user2
+                    join fs.user2.avatarImage
+                    WHERE fs.user1.id = :userId AND fs.status = :status
                     """;
 
-            TypedQuery<FriendDTO> query = em.createQuery(sql, FriendDTO.class);
+            TypedQuery<FriendDTO> query = entityManager.createQuery(sql, FriendDTO.class);
             query.setParameter("userId", userId);
             query.setParameter("status", FriendshipStatus.ACCEPTED);
             friends = query.getResultList();
 
-            JpaManager.commitTransaction(em);
+            JpaManager.commitTransaction(entityManager);
         } catch (Exception e) {
             e.printStackTrace();
-            JpaManager.rollbackTransaction(em);
+            JpaManager.rollbackTransaction(entityManager);
         } finally {
-            JpaManager.closeEntityManager(em);
+            JpaManager.closeEntityManager(entityManager);
         }
         return friends;
     }
-
     public List<FriendDTO> getFriendsFilterByName(Long userId, String name) {
         EntityManager em = JpaManager.getEntityManager();
         List<FriendDTO> friends = new ArrayList<>();

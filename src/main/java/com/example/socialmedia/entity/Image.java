@@ -21,10 +21,10 @@ public class Image {
     @Column(name = "upload_on", nullable = true)
     private Date uploadOn;
 
-    @PrePersist
+    @PrePersist //chay lenh nay truoc khi save image vao db
     protected void onCreate() {
         uploadOn = new Date();
-    }
+    } //ham tra ve thoi gian hien tai (thoi hian up anh vao db)
 
     public Image() {
     }

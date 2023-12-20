@@ -12,29 +12,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
-    public boolean createOne(User user) throws Exception {
-        EntityManager em = JpaManager.getEntityManager();
-        User found = findByEmail(user.getEmail());
-        if (found != null) {
-            throw new Exception("Email đã tồn tại");
-        }
+
+    public User createUSer(User user){
+        EntityManager entityManager = JpaManager.getEntityManager();
 
         try {
-            JpaManager.beginTransaction(em);
-            // Thêm hình đại diện mặc định
-            AvatarImage avatarImage = em.find(AvatarImage.class, 1);
-            user.setAvatarImage(avatarImage);
-            // Insert vào CSDL
-            em.persist(user);
-            JpaManager.commitTransaction(em);
-            JpaManager.closeEntityManager(em);
-            return true;
+            JpaManager.beginTransaction(entityManager);
+
+            entityManager.persist(user);
+
+            JpaManager.commitTransaction(entityManager);
+            JpaManager.closeEntityManager(entityManager);
         } catch (Exception e) {
-            e.printStackTrace();
-            JpaManager.rollbackTransaction(em);
-            JpaManager.closeEntityManager(em);
+            JpaManager.rollbackTransaction(entityManager);
+            JpaManager.closeEntityManager(entityManager);
         }
-        return false;
+        JpaManager.closeEntityManager(entityManager);
+        return user;
     }
 
     public User findOne(Long id) {
